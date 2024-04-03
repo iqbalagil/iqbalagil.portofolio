@@ -1,8 +1,7 @@
 import {React, Suspense} from "react";
 import * as stylex from "@stylexjs/stylex";
-import About from './about';
-import Nav from './NavStyles';
-import Loading from './loading';
+import About from './component/about/about';
+import Nav from './component/nav/navbar-main';
 
 const style = stylex.create({
   main : {
@@ -17,9 +16,7 @@ return (
   
   <div {...stylex.props(style.main)}>
 <div>
-  <Suspense fallback={<Loading/>}>
   <About/>
-  </Suspense>
 </div>
 <div>
 

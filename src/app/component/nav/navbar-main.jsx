@@ -1,14 +1,14 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-import "./about";
+import "../about/about";
 import * as stylex from "@stylexjs/stylex";
-import Button from './exwidget/button';
+import Button from './button';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import { usePathname } from "next/navigation";
-import {FaArrowDown} from "react-icons/fa6"
-import path from "path";
+import {FaArrowDown} from "react-icons/fa6";
+import clsx from "clsx";
 
 const styles = stylex.create({
   navbar: {
@@ -79,15 +79,6 @@ const styles = stylex.create({
       default: '#B4B4B8',
       ':hover': '#FFFFFF'
     },
-  },
-
-  active: {
-    backgroundColor : "#FBF9F1",
-    opacity: 1,
-    borderColor: 'white'
-  },
-
-  borderNav: {
     borderStyle: 'solid',
     borderColor: {
       default: '#3D3B40',
@@ -97,6 +88,20 @@ const styles = stylex.create({
     textAlign: "initial",
     zIndex: -99,
     borderWidth: 3,
+  },
+
+  active: {
+    color: '#ffffff',
+    borderStyle: 'solid',
+    borderColor: 'ffffff',
+    borderRadius: 10,
+    textAlign: "initial",
+    zIndex: -99,
+    borderWidth: 3,
+  },
+
+  borderNav: {
+
 
   },
 
@@ -118,13 +123,15 @@ const styles = stylex.create({
 
 });
 
+
 export default function Nav() {
   const pathname = usePathname();
-  const [isActive, SetisActive] = useState(false);
-  
+  const router = useRouter();
+  const [isActive, setIsActive] = useState(pathname === '/work');
+
   useEffect(() => {
-    SetisActive(pathname == 'work')
-  },[pathname])
+    setIsActive(router.pathname === '/work');
+  }, [router.pathname]);
 
   return (
     <div {...stylex.props(styles.navbar)}>
@@ -139,7 +146,7 @@ export default function Nav() {
               HOME</p>
             <Link href="#" {...stylex.props(styles.text,styles.borderNav,styles.unactive)}><FaArrowDown></FaArrowDown>_CV</Link>
 
-            <Link href="work" className={isActive ? 'active' : 'unactive'} {...stylex.props(styles.text,styles.borderNav, isActive ? styles.active : styles.unactive)}>Work</Link>
+            <Link href="work"  {...stylex.props(styles.text,styles.borderNav, isActive ? styles.active : styles.unactive)}>Work</Link>
           </li>
           <li>
           <Button></Button>
@@ -148,4 +155,7 @@ export default function Nav() {
       </nav>
     </div>
   );
+
+  
+
 }

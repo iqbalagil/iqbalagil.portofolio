@@ -1,6 +1,6 @@
 
 import './globals.css';
-import Nav from './NavStyles';
+import Nav from './component/nav/navbar-main';
 import * as stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({
